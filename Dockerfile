@@ -17,30 +17,35 @@ RUN set -xe && \
       rm -rf /tmp/ruby-$RUBY_VERSION; \
     done
 
-ENV NIM_VERSIONS \
-      0.20.0
 RUN set -xe && \
-    for NIM_VERSION in $NIM_VERSIONS; do \
-      curl -fSsL "https://nim-lang.org/download/nim-$NIM_VERSION-linux_x64.tar.xz" -o /tmp/nim-$NIM_VERSION.tar.xf && \
-      tar -xf /tmp/nim-$NIM_VERSION.tar.xf -C /usr/local && \
-      chmod +x /usr/local/nim-$NIM_VERSION/bin/nim && \
-      rm /tmp/nim-$NIM_VERSION.tar.xf; \
-    done
-
-RUN set -xe && \
-    apt-get update && apt-get install -y locales && \
-    echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && locale-gen
+    apt-get update && \
+    apt-get install -y --no-install-recommends locales && \
+    echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && locale-gen && \
+    rm -rf /var/lib/apt/lists/*
 ENV LANG=en_US.UTF-8 LANGUAGE=en_US:en LC_ALL=en_US.UTF-8
 
 RUN set -xe && \
-    apt-get update && apt-get install -y libcap-dev && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends libcap-dev && \
     git clone https://github.com/ioi/isolate.git /tmp/isolate && \
     cd /tmp/isolate && \
     git checkout 18554e83793508acd1032d0cf4229a332c43085e && \
     echo "num_boxes = 2147483647" >> default.cf && \
     make install && \
-    rm -rf /tmp/isolate
+    rm -rf /tmp/isolate && \
+    rm -rf /var/lib/apt/lists/*
 ENV BOX_ROOT /var/local/lib/isolate
 
+COPY update.sh /
+RUN set -xe && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends cron && \
+    /update.sh && \
+    echo "0 0 * * * /update.sh > /var/log/cron.log 2>&1" | crontab - && \
+    rm -rf /var/lib/apt/lists/*
+
+COPY entrypoint.sh /
+ENTRYPOINT ["/entrypoint.sh"]
+
 LABEL maintainer="Herman Zvonimir Došilović, hermanz.dosilovic@gmail.com"
-LABEL version="nim0.20.0"
+LABEL version="nim-latest"
