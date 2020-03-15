@@ -1,3 +1,5 @@
+# C# Mono only branch of Judge0 API-BASE
+
 # Judge0 API Base
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://github.com/judge0/api-base/blob/master/LICENSE)
 [![Become a Patron](https://img.shields.io/badge/Donate-Patreon-orange)](https://www.patreon.com/hermanzdosilovic)
@@ -19,38 +21,7 @@ Here is a list of supported languages:
 
 |#|Name|
 |:---:|:---:|
-|1|Assembly (NASM 2.14.02)|
-|2|Bash (5.0.0)|
-|3|Basic (FBC 1.07.1)|
-|4|C (GCC 7.4.0)|
-|5|C++ (GCC 7.4.0)|
-|6|C (GCC 8.3.0)|
-|7|C++ (GCC 8.3.0)|
-|8|C (GCC 9.2.0)|
-|9|C++ (GCC 9.2.0)|
-|10|C# (Mono 6.6.0.161)|
-|11|Common Lisp (SBCL 2.0.0)|
-|12|D (DMD 2.089.1)|
-|13|Elixir (1.9.4)|
-|14|Erlang (OTP 22.2)|
-|15|Executable|
-|16|Fortran (GFortran 9.2.0)|
-|17|Go (1.13.5)|
-|18|Haskell (GHC 8.8.1)|
-|19|Java (OpenJDK 13.0.1)|
-|20|JavaScript (Node.js 12.14.0)|
-|21|Lua (5.3.5)|
-|22|OCaml (4.09.0)|
-|23|Octave (5.1.0)|
-|24|Pascal (FPC 3.0.4)|
-|25|PHP (7.4.1)|
-|26|Plain Text|
-|27|Prolog (GNU Prolog 1.4.5)|
-|28|Python (2.7.17)|
-|29|Python (3.8.1)|
-|30|Ruby (2.7.0)|
-|31|Rust (1.40.0)|
-|32|TypeScript (3.7.4)|
+|1|C# (Mono 6.6.0.161)|
 
 ## Sandbox Environment
 Sandbox environment is also included in this image. For sandbox environment we are using [isolate](https://github.com/ioi/isolate) (licensed under [GPL v2](https://github.com/ioi/isolate/blob/master/LICENSE)).
