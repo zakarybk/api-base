@@ -61,4 +61,4 @@ RUN set -xe && \
 ENV BOX_ROOT /var/local/lib/isolate
 
 LABEL maintainer="Herman Zvonimir Došilović, hermanz.dosilovic@gmail.com"
-LABEL version="1.0.0"
+LABEL version="1.0.0-mono-only"
