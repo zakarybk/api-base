@@ -19,26 +19,16 @@ RUN set -xe && \
       make -j$(nproc) install && \
       rm -rf /tmp/*; \
     done
-
-# Check for latest version here: https://www.mono-project.com/download/stable
-ENV MONO_VERSIONS \
-      6.6.0.161
+    
+ENV DOTNET_CLI_TELEMETRY_OPTOUT true
 RUN set -xe && \
-    apt-get update && \
-    apt-get install -y --no-install-recommends cmake && \
-    rm -rf /var/lib/apt/lists/* && \
-    for VERSION in $MONO_VERSIONS; do \
-      curl -fSsL "https://download.mono-project.com/sources/mono/mono-$VERSION.tar.xz" -o /tmp/mono-$VERSION.tar.xz && \
-      mkdir /tmp/mono-$VERSION && \
-      tar -xf /tmp/mono-$VERSION.tar.xz -C /tmp/mono-$VERSION --strip-components=1 && \
-      rm /tmp/mono-$VERSION.tar.xz && \
-      cd /tmp/mono-$VERSION && \
-      ./configure \
-        --prefix=/usr/local/mono-$VERSION && \
-      make -j$(nproc) && \
-      make -j$(proc) install && \
-      rm -rf /tmp/*; \
-    done
+      wget https://packages.microsoft.com/config/ubuntu/19.10/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && \
+      dpkg -i packages-microsoft-prod.deb && \
+      apt-get update && \
+      apt-get install -y apt-transport-https && \
+      apt-get update && \
+      apt-get install -y dotnet-sdk-3.1 && \
+      dotnet add package xunit --version 2.4.1
 
 RUN set -xe && \
     apt-get update && \
