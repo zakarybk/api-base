@@ -29,6 +29,18 @@ RUN set -xe && \
       apt-get update && \
       apt-get install -y dotnet-sdk-3.1 && \
       rm packages-microsoft-prod.deb
+      
+# Check for latest version here: https://github.com/microsoft/TypeScript/releases
+ENV TYPESCRIPT_VERSIONS \
+      3.7.4
+RUN set -xe && \
+    curl -fSsL "https://deb.nodesource.com/setup_12.x" | bash - && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends nodejs && \
+    rm -rf /var/lib/apt/lists/* && \
+    for VERSION in $TYPESCRIPT_VERSIONS; do \
+      npm install -g typescript@$VERSION; \
+    done
 
 RUN set -xe && \
     apt-get update && \
