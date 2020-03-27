@@ -28,7 +28,9 @@ RUN set -xe && \
       apt-get install -y apt-transport-https && \
       apt-get update && \
       apt-get install -y dotnet-sdk-3.1 && \
-      dotnet add package xunit --version 2.4.1
+      cd /tests/dotnet && \
+      dotnet add package xunit --version 2.4.1 &&\
+      rm packages-microsoft-prod.deb
 
 RUN set -xe && \
     apt-get update && \
