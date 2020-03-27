@@ -24,6 +24,7 @@ ENV DOTNET_CLI_TELEMETRY_OPTOUT true
 RUN set -xe && \
       wget https://packages.microsoft.com/config/ubuntu/19.10/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && \
       dpkg -i packages-microsoft-prod.deb && \
+      sudo rm -rf /var/lib/apt/lists/* && \
       apt-get update && \
       apt-get install -y apt-transport-https && \
       apt-get update && \
