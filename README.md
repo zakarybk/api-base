@@ -1,5 +1,10 @@
 # C# Mono only branch of Judge0 API-BASE
 
+## Installation
+git clone https://github.com/zakarybk/api-base.git -b 1.0.0-mono-only
+cd api-base
+sudo docker build -t judge0/api-base:1.0.0-mono-only .
+
 # Judge0 API Base
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://github.com/judge0/api-base/blob/master/LICENSE)
 [![Become a Patron](https://img.shields.io/badge/Donate-Patreon-orange)](https://www.patreon.com/hermanzdosilovic)
