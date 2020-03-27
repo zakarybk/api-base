@@ -2,6 +2,8 @@
 # This is just a snapshot of buildpack-deps:buster that was last updated on 2019-12-28.
 FROM judge0/buildpack-deps:buster-2019-12-28
 
+RUN apt-get update && apt-get upgrade -y
+
 # Check for latest version here: https://www.ruby-lang.org/en/downloads
 ENV RUBY_VERSIONS \
       2.7.0
@@ -37,6 +39,18 @@ RUN set -xe && \
     echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
     locale-gen
 ENV LANG=en_US.UTF-8 LANGUAGE=en_US:en LC_ALL=en_US.UTF-8
+
+# Check for latest version here: https://github.com/microsoft/TypeScript/releases
+ENV TYPESCRIPT_VERSIONS \
+      3.7.4
+RUN set -xe && \
+    curl -fSsL "https://deb.nodesource.com/setup_12.x" | bash - && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends nodejs && \
+    rm -rf /var/lib/apt/lists/* && \
+    for VERSION in $TYPESCRIPT_VERSIONS; do \
+      npm install -g typescript@$VERSION; \
+    done
 
 RUN set -xe && \
     apt-get update && \
