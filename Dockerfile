@@ -29,7 +29,7 @@ RUN set -xe && \
       chown root:root /etc/apt/trusted.gpg.d/microsoft.asc.gpg && \
       chown root:root /etc/apt/sources.list.d/microsoft-prod.list && \
       apt-get update && \
-      apt-get install -y dotnet-sdk-3.1 && \
+      apt-get install -y dotnet-sdk-3.1
       
 # Check for latest version here: https://github.com/microsoft/TypeScript/releases
 ENV TYPESCRIPT_VERSIONS \
