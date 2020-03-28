@@ -22,13 +22,14 @@ RUN set -xe && \
     
 ENV DOTNET_CLI_TELEMETRY_OPTOUT true
 RUN set -xe && \
-      wget https://packages.microsoft.com/config/ubuntu/19.10/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && \
-      dpkg -i packages-microsoft-prod.deb && \
-      apt-get update && \
-      apt-get install -y apt-transport-https && \
+      wget -O- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.asc.gpg && \
+      mv microsoft.asc.gpg /etc/apt/trusted.gpg.d/ && \
+      wget https://packages.microsoft.com/config/debian/10/prod.list && \
+      mv prod.list /etc/apt/sources.list.d/microsoft-prod.list && \
+      chown root:root /etc/apt/trusted.gpg.d/microsoft.asc.gpg && \
+      chown root:root /etc/apt/sources.list.d/microsoft-prod.list && \
       apt-get update && \
       apt-get install -y dotnet-sdk-3.1 && \
-      rm packages-microsoft-prod.deb
       
 # Check for latest version here: https://github.com/microsoft/TypeScript/releases
 ENV TYPESCRIPT_VERSIONS \
