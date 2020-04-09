@@ -1,4 +1,8 @@
-# C# Mono only branch of Judge0 API-BASE
+# README
+# C# Dotnet only branch of Judge0 API-BASE (yes it's called mono-only, but is actually dotnet)
+* Previously mono only but had trouble adding in Xunit and Math.Net
+* The aim of this branch is for a passing test of Xunit and Math.Net
+* I have been able to get Xunit working with dotnet test, however I get permission errors in api (non-base) from file access issues
 
 ## Installation
 * git clone https://github.com/zakarybk/api-base.git -b 1.0.0-mono-only
